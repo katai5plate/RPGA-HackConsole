@@ -11,6 +11,7 @@
   <div class="editor"></div>
   <script>
     const isRPGAtsumaru = !!window.RPGAtsumaru;
+    const intervalTime = isRPGAtsumaru ? 5000 : 1000;
     
     const init = () => {
       const text = isRPGA =>
@@ -41,7 +42,8 @@ ${
       window.send = () => {
         console.log(eval(editor.code));
         button.disabled = true;
-        setTimeout(() => (button.disabled = false), 1500);
+        button.innerText = `Wait ${intervalTime}ms!`
+        setTimeout(() => (button.disabled = false, button.innerText = "SEND"), intervalTime);
       };
       editor.updateCode(text(isRPGAtsumaru));
     };
