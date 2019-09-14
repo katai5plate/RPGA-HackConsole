@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #000000;
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="window.send()">SEND</button>
+    <div class="editor"></div>
+    <script>
+      const __editor = new CodeFlask('.editor', {
+        language: 'js',
+        lineNumbers: true
+      });
+      window.send = () => console.log(__editor);
+    </script>
+  </body>
+</html>
