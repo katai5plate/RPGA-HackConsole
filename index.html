@@ -20,14 +20,14 @@
 ${isRPGA?"// console.log(\"何かキーパッドを押してください\");":""}
 ${isRPGA?"// window.RPGAtsumaru.controllers.defaultController.subscribe(console.log);":""}
 `
-      const editor = new CodeFlask('.editor', {
+      window.editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
       });
       window.send = () => {
-        console.log(eval(editor.code));
+        console.log(eval(window.editor.code));
       };
-      editor.code = text(!!window.RPGAtsumaru);
+      window.editor.code = text(!!window.RPGAtsumaru);
     </script>
     <style>	
       body {	
