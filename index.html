@@ -24,11 +24,13 @@
     <button onclick="window.send()">SEND</button>
     <div class="editor"></div>
     <script>
-      const __editor = new CodeFlask('.editor', {
+      const editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
       });
-      window.send = () => console.log(__editor);
+      window.send = () => {
+        eval(editor.code);
+      };
     </script>
   </body>
 </html>
