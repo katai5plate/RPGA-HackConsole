@@ -5,7 +5,7 @@
     <script src="./codeflask.min.js"></script>
   </head>
   <body>
-    <button onclick="window.send()" class="btn btn-primary">SEND</button>
+    <button onclick="window.send()" class="send btn btn-primary">SEND</button>
     <div class="editor"></div>
     <script>
       const text = isRPGA =>
@@ -20,12 +20,15 @@
 ${isRPGA?"// console.log(\"何かキーパッドを押してください\");":""}
 ${isRPGA?"// window.RPGAtsumaru.controllers.defaultController.subscribe(console.log);":""}
 `
+      const button = document.querySelector(".send");
       const editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
       });
       window.send = () => {
         console.log(eval(editor.code));
+        button.disable = true;
+        setTimeout(1500, () => (button.disale = false));
       };
       editor.updateCode(text(!!window.RPGAtsumaru));
     </script>
