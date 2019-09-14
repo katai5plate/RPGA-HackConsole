@@ -11,12 +11,7 @@
   <div class="editor"></div>
   <script>
     const isRPGAtsumaru = !!window.RPGAtsumaru;
-    if (isRPGAtsumaru) {
-      window.RPGAtsumaru.experimental.user
-        .getSelfInformation()
-        .then(() => init())
-        .catch(() => error());
-    }
+    
     const init = () => {
       const text = isRPGA =>
         `/*
@@ -58,6 +53,15 @@ ${
   <li>ニコニコのアカウントにログインしていない</li>
   </ul>
   `
+    }
+    
+    if (isRPGAtsumaru) {
+      window.RPGAtsumaru.experimental.user
+        .getSelfInformation()
+        .then(() => init())
+        .catch(() => error());
+    }else{
+      init();
     }
   </script>
   <style>
