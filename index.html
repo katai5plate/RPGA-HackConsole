@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="./bootstrap.min.css">
-    <script src="./codeflask.min.js"></script>
-  </head>
-  <body>
-    <button onclick="window.send()" class="send btn btn-primary">SEND</button>
-    <div class="editor"></div>
-    <script>
+
+<head>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+  <script src="./codeflask.min.js"></script>
+</head>
+
+<body>
+  <button onclick="window.send()" class="send btn btn-primary">SEND</button>
+  <div class="editor"></div>
+  <script>
+    const isRPGAtsumaru = !!window.RPGAtsumaru;
+    if (isRPGAtsumaru) {
+      window.RPGAtsumaru.experimental.user
+        .getSelfInformation()
+        .then(() => init())
+        .catch(() => error());
+    }
+    const init = () => {
       const text = isRPGA =>
-`/*
+        `/*
   使用方法:
   左上の「SEND」ボタンを押すと、
   ここで書いたコードが \`console.log( eval( CODE ))\` されます。
-  ${isRPGA?"\n  例えば、以下のコードのコメントアウトを解除し、SENDを押すことで、\n  アツマールのゲームパッドAPIの情報を取得することができます。":""}
+  ${
+        isRPGA
+          ? '\n  例えば、以下のコードのコメントアウトを解除し、SENDを押すことで、\n  アツマールのゲームパッドAPIの情報を取得することができます。'
+          : ''
+        }
   さっそくブラウザの DevTools を開いて、トライしてみましょう。
 */
 
-${isRPGA?"// console.log(\"何かキーパッドを押してください\");":""}
-${isRPGA?"// window.RPGAtsumaru.controllers.defaultController.subscribe(console.log);":""}
-`
-      const button = document.querySelector(".send");
+${isRPGA ? '// console.log("何かキーパッドを押してください");' : ''}
+${
+        isRPGA
+          ? '// window.RPGAtsumaru.controllers.defaultController.subscribe(console.log);'
+          : ''
+        }
+`;
+      const button = document.querySelector('.send');
       const editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
@@ -30,15 +48,27 @@ ${isRPGA?"// window.RPGAtsumaru.controllers.defaultController.subscribe(console.
         button.disabled = true;
         setTimeout(() => (button.disabled = false), 1500);
       };
-      editor.updateCode(text(!!window.RPGAtsumaru));
-    </script>
-    <style>	
-      body {	
-        height: 100%;
-      }
-      .codeflask {
-        height: 90%
-      }
-    </style>
-  </body>
+      editor.updateCode(text(isRPGAtsumaru));
+    };
+
+    const error = () => {
+      document.querySelector('.editor').innerHTML = `
+  <p>ごめんなさい！以下の方は使用することができません！</p>
+  <ul>
+  <li>ニコニコのアカウントにログインしていない</li>
+  </ul>
+  `
+    }
+  </script>
+  <style>
+    body {
+      height: 100%;
+    }
+
+    .codeflask {
+      height: 90%
+    }
+  </style>
+</body>
+
 </html>
