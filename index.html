@@ -8,6 +8,18 @@
     <button onclick="window.send()" class="btn btn-primary">SEND</button>
     <div class="editor"></div>
     <script>
+      const text = isRPGA =>
+`/*
+  使用方法:
+  左上の「SEND」ボタンを押すと、
+  ここで書いたコードが \`console.log( eval( CODE ))\` されます。
+  ${isRPGA?"\n例えば、以下のコードのコメントアウトを解除し、SENDを押すことで、\nアツマールのゲームパッドAPIの情報を取得することができます。":""}
+  やってみましょう。
+*/
+
+${isRPGA?"// console.log(\"何かキーパッドを押してください\");":""}
+${isRPGA?"// window.RPGAtsumaru.controllers.defaultController.subscribe(console.log);":""}
+`
       const editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
@@ -15,6 +27,7 @@
       window.send = () => {
         console.log(eval(editor.code));
       };
+      editor.code = text(!!window.RPGAtsumaru);
     </script>
     <style>	
       body {	
