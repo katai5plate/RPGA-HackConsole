@@ -18,10 +18,11 @@
         bottom: 0px;
       }
     </style>
+    <link rel="stylesheet" href="./bootstrap.min.css">
     <script src="./codeflask.min.js"></script>
   </head>
   <body>
-    <button onclick="window.send()">SEND</button>
+    <button onclick="window.send()" class="btn btn-primary">SEND</button>
     <div class="editor"></div>
     <script>
       const editor = new CodeFlask('.editor', {
