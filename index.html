@@ -27,8 +27,8 @@ ${isRPGA?"// window.RPGAtsumaru.controllers.defaultController.subscribe(console.
       });
       window.send = () => {
         console.log(eval(editor.code));
-        button.disable = true;
-        setTimeout(() => (button.disable = false), 1500);
+        button.disabled = true;
+        setTimeout(() => (button.disabled = false), 1500);
       };
       editor.updateCode(text(!!window.RPGAtsumaru));
     </script>
