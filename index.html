@@ -18,6 +18,7 @@
     const isPC = !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const intervalTime = isRPGAtsumaru ? 10000 : 1000;
     const button = document.querySelector('.send');
+    const editorDOM = document.querySelector('.editor');
     
     const init = () => {
       if(!isPC){
@@ -63,7 +64,7 @@ ${
 
     const error = () => {
       button.remove();
-      document.querySelector('.editor').innerHTML = `
+      editorDOM.innerHTML = `
   <p>ごめんなさい！以下の方は使用することができません！</p>
   <ul>
   ${isRPGAtsumaru?"<li>ニコニコのアカウントにログインしていない</li>":""}
