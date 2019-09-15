@@ -10,6 +10,16 @@
   <button onclick="(()=>{console.log('\n-- 少々お待ちください... --\n');window.sleepButton();localStorage.setItem('AHC-log', JSON.stringify({at: new Date().toISOString(),code: window.editor.code,userId: window.ahc && window.ahc.user.id,userName: window.ahc && window.ahc.user.name}));setTimeout(()=>{console.log('\n-- 結果 --\n');console.log(eval(window.editor.code));},!!window.RPGAtsumaru?5000:0)})()" class="send btn btn-primary">SEND</button>
   <div class="editor"></div>
   <script>
+    Object.defineProperty(window, "eval", {
+      writable: false,
+      enumerable: false,
+      configurable: false
+    })
+    Object.defineProperty(console, "log", {
+      writable: false,
+      enumerable: false,
+      configurable: false
+    })
     window.deepFreeze = obj =>
       Object.keys(obj).forEach(prop =>
         !(obj[prop] instanceof Object) || Object.isFrozen(obj[prop]) ? null : deepFreeze(obj[prop])
