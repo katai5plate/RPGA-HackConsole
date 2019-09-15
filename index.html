@@ -13,6 +13,7 @@
     const isRPGAtsumaru = !!window.RPGAtsumaru;
     const isPC = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const intervalTime = isRPGAtsumaru ? 5000 : 1000;
+    const button = document.querySelector('.send');
     
     const init = () => {
       if(!isPC){
@@ -39,7 +40,6 @@ ${
           : ''
         }
 `;
-      const button = document.querySelector('.send');
       const editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
@@ -54,6 +54,7 @@ ${
     };
 
     const error = () => {
+      button.remove();
       document.querySelector('.editor').innerHTML = `
   <p>ごめんなさい！以下の方は使用することができません！</p>
   <ul>
