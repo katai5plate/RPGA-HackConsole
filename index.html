@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <button onclick="(()=>{localStorage.setItem('AHC-log', JSON.stringify({at: new Date().toISOString(),code: window.editor.code,userId: window.ahc && window.ahc.user.id,userName: window.ahc && window.ahc.user.name}));setTimeout(()=>{console.log(eval(window.editor.code));window.sleepButton();},window.isRPGAtsumaru?5000:0)})()" class="send btn btn-primary">SEND</button>
+  <button onclick="(()=>{window.sleepButton();localStorage.setItem('AHC-log', JSON.stringify({at: new Date().toISOString(),code: window.editor.code,userId: window.ahc && window.ahc.user.id,userName: window.ahc && window.ahc.user.name}));setTimeout(()=>{console.log(eval(window.editor.code));},window.isRPGAtsumaru?5000:0)})()" class="send btn btn-primary">SEND</button>
   <div class="editor"></div>
   <script>
     window.isRPGAtsumaru = !!window.RPGAtsumaru;
