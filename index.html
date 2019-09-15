@@ -23,15 +23,15 @@
       [document.body, "getElementsByClassName"],
       [document.body, "getElementsByTagName"],
       [document.body, "getElementsByTagNameNS"],
-    ]
+    ];
     const lockMethods = [
       [window, "eval"],
       [window.console, "log"],
     ];
 
     editableMethods.forEach(([a, b]) => {
-      a[b] = (...args) => console.log("無効化されたメソッドです。", args);
-    })
+      a[b] = (...args) => console.log("無効化されたメソッドです。", ...args);
+    });
     [...editableMethods, ...lockMethods].forEach(([a, b]) => {
       Object.defineProperty(a, b, {
         writable: false,
