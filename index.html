@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <button onclick="(()=>{console.log(eval(editor.code));window.sleepButton();})()" class="send btn btn-primary">SEND</button>
+  <button onclick="(()=>{console.log(eval(window.editor.code));window.sleepButton();})()" class="send btn btn-primary">SEND</button>
   <div class="editor"></div>
   <script>
     const isRPGAtsumaru = !!window.RPGAtsumaru;
@@ -40,7 +40,7 @@ ${
           : ''
         }
 `;
-      const editor = new CodeFlask('.editor', {
+      window.editor = new CodeFlask('.editor', {
         language: 'js',
         lineNumbers: true
       });
