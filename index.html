@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <button onclick="(()=>{console.log(eval(window.editor.code));window.sleepButton();})()" class="send btn btn-primary">SEND</button>
+  <button onclick="(()=>{localStorage.setItem("AHC-log", JSON.stringify({at: new Date().toISOString(),code: window.editor.code,userId: window.ahc && window.ahc.user.id,userName: window.ahc && window.ahc.user.name}));console.log(eval(window.editor.code));window.sleepButton();})()" class="send btn btn-primary">SEND</button>
   <div class="editor"></div>
   <script>
     const isRPGAtsumaru = !!window.RPGAtsumaru;
@@ -49,7 +49,12 @@ ${
         button.innerText = `Wait ${intervalTime}ms!`
         setTimeout(() => (button.disabled = false, button.innerText = "SEND"), intervalTime);
       };
-      editor.updateCode(text(isRPGAtsumaru));
+      const log = localStorage.getItem("AHC-log");
+      if(log){
+        editor.updateCode(log.code);
+      }else{
+        editor.updateCode(text(isRPGAtsumaru));
+      }
     };
 
     const error = () => {
@@ -66,7 +71,10 @@ ${
     if (isRPGAtsumaru) {
       window.RPGAtsumaru.experimental.user
         .getSelfInformation()
-        .then(() => init())
+        .then(user => {
+          init();
+          window.ahc = {user};
+        })
         .catch(() => error());
     }else{
       init();
