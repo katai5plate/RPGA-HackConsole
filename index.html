@@ -85,9 +85,19 @@ ${
     }else{
       init();
     }
+    
+    const acceptQuerySelector = [
+      "code[class*=\"language-\"], [class*=\"language-\"] code, code[class*=\"lang-\"], [class*=\"lang-\"] code",
+      "pre[data-src]",
+    ].map(s => ({s, n: document.querySelector(s)}))
+    const mockQuerySelectorAll = arg => {
+      if(acceptQuerySelector.includes(arg)){
+        acceptQuerySelector.filter(({s}) => arg === s)[0].n;
+      }
+    }
     const editableMethods = [
       [document, "querySelector"],
-      [document, "querySelectorAll"],
+//       [document, "querySelectorAll"],
       [document, "getElementById"],
       [document, "getElementsByClassName"],
       [document, "getElementsByName"],
@@ -99,6 +109,7 @@ ${
       [document.body, "getElementsByTagName"],
       [document.body, "getElementsByTagNameNS"],
     ];
+    document.querySelectorAll = mockQuerySelectorAll;
     const lockMethods = [
       [window, "eval"],
       [window.console, "log"],
