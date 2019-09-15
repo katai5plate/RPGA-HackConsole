@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <button onclick="window.send()" class="send btn btn-primary">SEND</button>
+  <button onclick="(()=>{console.log(eval(editor.code));window.sleepButton();})()" class="send btn btn-primary">SEND</button>
   <div class="editor"></div>
   <script>
     const isRPGAtsumaru = !!window.RPGAtsumaru;
@@ -44,8 +44,7 @@ ${
         language: 'js',
         lineNumbers: true
       });
-      window.send = () => {
-        console.log(eval(editor.code));
+      window.sleepButton = () => {
         button.disabled = true;
         button.innerText = `Wait ${intervalTime}ms!`
         setTimeout(() => (button.disabled = false, button.innerText = "SEND"), intervalTime);
