@@ -11,7 +11,7 @@
   <div class="editor"></div>
   <script>
     const isRPGAtsumaru = !!window.RPGAtsumaru;
-    const isPC = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isPC = !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const intervalTime = isRPGAtsumaru ? 5000 : 1000;
     const button = document.querySelector('.send');
     
