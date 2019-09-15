@@ -103,8 +103,8 @@ ${
       [window, "eval"],
       [window.console, "log"],
     ];
-    editableMethods.forEach(([a, b]) => {
-      a[b] = (...args) => console.log("無効化されたメソッドです。", a, b, ...args);
+    editableMethods.forEach(([a, b], i) => {
+      a[b] = (...args) => console.log("無効化されたメソッドです。", i, a, b, ...args);
     });
     [...editableMethods, ...lockMethods].forEach(([a, b]) => {
       Object.defineProperty(a, b, {
